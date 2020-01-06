@@ -1,0 +1,2 @@
+class DenyReason < ApplicationRecord
+end

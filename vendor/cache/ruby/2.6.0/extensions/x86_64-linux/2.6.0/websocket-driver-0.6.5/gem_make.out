@@ -1,0 +1,15 @@
+current directory: /mnt/c/Users/behzad/Desktop/projects/AmoudSeir/vendor/cache/ruby/2.6.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+/home/behzad/.rbenv/versions/2.6.5/bin/ruby -I /home/behzad/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200106-17598-8mw1t7.rb extconf.rb
+creating Makefile
+
+current directory: /mnt/c/Users/behzad/Desktop/projects/AmoudSeir/vendor/cache/ruby/2.6.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /mnt/c/Users/behzad/Desktop/projects/AmoudSeir/vendor/cache/ruby/2.6.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /mnt/c/Users/behzad/Desktop/projects/AmoudSeir/vendor/cache/ruby/2.6.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20200106-17598-1yhsii
