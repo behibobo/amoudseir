@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20200106161309) do
     t.string "address"
     t.bigint "insurance_id"
     t.string "insurance_finish_date"
+    t.string "insurance_date"
     t.bigint "standard_id"
     t.string "standard_finish_date"
     t.integer "swing"
@@ -33,6 +34,20 @@ ActiveRecord::Schema.define(version: 20200106161309) do
     t.integer "elevator_type", limit: 2
     t.integer "floors", limit: 2
     t.integer "stops", limit: 2
+    t.integer "usage", limit: 2
+    t.integer "capacity", limit: 2
+    t.string "automatic_door_name"
+    t.string "serial_number"
+    t.integer "towing_wire", limit: 2
+    t.integer "engine_room", limit: 2
+    t.integer "panel_type", limit: 2
+    t.string "panel_name"
+    t.string "drive"
+    t.integer "feedback", limit: 2
+    t.string "engine"
+    t.integer "engine_type", limit: 2
+    t.float "power"
+    t.integer "car_communication", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "contract_number"
