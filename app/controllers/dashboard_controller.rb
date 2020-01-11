@@ -44,11 +44,11 @@ class DashboardController < ApplicationController
 
   def assign_user
     @denied = DenyService.find params[:deny_service_id]
-    @service = service.find @denied.service.id
+    @service = Service.find @denied.service.id
     @service.user_id = params[:technician_id]
     @denied.handled = true
     @denied.save
-    @servcie.save
+    @service.save
     render json: @denied
   end
 

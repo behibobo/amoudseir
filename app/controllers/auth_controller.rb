@@ -14,7 +14,7 @@ class AuthController < ApplicationController
         render json: {
           token: command.result,
           role: User.roles[user.role],
-          status: User.statuses[user.status],
+          status: 0,
           open_services: user.services.where(status: :open).size,
           unread_messages: Message.joins([:message_status, :to]).where(:users => {id: user.id}).where(:message_statuses => {status: :unread}).size
         }

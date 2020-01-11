@@ -3,8 +3,16 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = current_user.messages.paginate(page: params[:page], per_page: params[:page_size])
-    render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: current_user.messages.count }
+    @messages = Message.all
+    if current_user.role == "customer"
+	@messages = @messages.where(to: current_user).or(Message.where(message_type: 'customer')).or(Message.where(message_type: 'everyone'))
+
+    elsif current_user.role == "technician"
+	@messages = @messages.where(to: current_user).or(Message.where(message_type: 'technician')).or(Message.where(message_type: 'everyone'))
+    end
+    @total_records = @messages.count
+    @messages = @messages.paginate(page: params[:page], per_page: params[:page_size])
+    render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: @total_records }
   end
 
   # GET /messages/1
@@ -46,6 +54,6 @@ class MessagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def message_params
-      params.require(:message).permit(:body, :from_id, :to, :message_type)
+      params.require(:message).permit(:body, :title, :to, :message_type)
     end
 end

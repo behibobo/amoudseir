@@ -2,7 +2,7 @@ class ContractSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :customer_id, :title, :description,
   :start_date, :finish_date, :total_price, :address, :insurance_id, :insurance_finish_date,
    :standard_id, :standard_finish_date, :swing, :automatic, :elevator_type,
-    :floors, :stops, :contract_number, :user, :customer
+    :floors, :stops, :contract_number, :user, :customer, :service_day, :total_price
 
   def user
     ActiveModelSerializers::SerializableResource.new(object.user)

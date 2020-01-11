@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   post 'auth/login', to: 'auth#login'
-  post 'services/request_repair', to: 'services#request_repair'
+  post 'service/request_repair', to: 'services#request_repair'
   get 'service/create_services', to: 'services#create_services'
   get 'service/open_services', to: 'services#open_services'
   post 'service/complete_service', to: 'services#complete_service'
