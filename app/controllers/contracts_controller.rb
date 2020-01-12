@@ -53,6 +53,16 @@ class ContractsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def contract_params
-      params.require(:contract).permit(:title, :user_id, :customer_id, :description, :start_date, :finish_date, :total_price, :address, :insurance_id, :insurance_finish_date, :standard_id, :standard_finish_date, :swing, :automatic, :elevator_type, :floors, :stops, :service_day, :contract_number)
+      params.require(:contract).permit(
+        :title, :user_id, :customer_id, 
+        :description, :start_date, :finish_date, 
+        :total_price, :address, :insurance_id, 
+        :insurance_finish_date, :standard_id, 
+        :standard_finish_date, :swing, :automatic, 
+        :elevator_type, :floors, :stops, :service_day, 
+        :usage, :capacity, :automatic_door_name, :serial_number,
+        :towing_wire, :engine_room, :panel_type, :panel_name,
+        :drive, :feedback, :engine, :engine_type, :power, :car_communication,
+        :contract_number, :insurance_date)
     end
 end

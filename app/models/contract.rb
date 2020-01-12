@@ -7,7 +7,7 @@ class Contract < ApplicationRecord
 
   enum elevator_type: ["hydraulic", "traction"]
   enum usage: ["person", "load", "vehicle", "bed"]
-  enum towing_wire: ["2:1", "1:1"]
+  enum towing_wire: ["1:1", "2:1"]
   enum engine_room: ["MR", "MRL", "MRD"]
   enum panel_type: ["VVVF", "double_speed"]
   enum feedback: ["open", "close"]
