@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   get 'dashboard/denied', to: 'dashboard#denied_services'
   post 'dashboard/assign_user', to: 'dashboard#assign_user'
   get 'dashboard/chart', to: 'dashboard#chart'
+  get 'dashboard/contracts', to: 'dashboard#contracts'
 end

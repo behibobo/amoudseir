@@ -1,8 +1,8 @@
 class Contract < ApplicationRecord
   belongs_to :user, class_name: 'User'
   belongs_to :customer, class_name: 'User'
-  belongs_to :standard
-  belongs_to :insurance
+  belongs_to :standard, optional: true
+  belongs_to :insurance, optional: true
   has_many :services
 
   enum elevator_type: ["hydraulic", "traction"]
@@ -13,5 +13,6 @@ class Contract < ApplicationRecord
   enum feedback: ["open", "close"]
   enum engine_type: ["gearbox", "gearless"]
   enum car_communication: ["parallel", "coding"]
+  enum insurance_type: ["initial", "periodic"]
 
 end

@@ -37,6 +37,52 @@ class DashboardController < ApplicationController
     }
   end
 
+  def contracts
+    @due_contracts = Contract.where('finish_date < ?', Date.today + 2.month)
+    .map{|c| [
+      id: c.id, 
+      finish_date: c.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract_number, 
+      title: c.title
+    ]}
+    @due_insurances = Contract.where('insurance_finish_date < ?', Date.today + 1.month)
+    .map{|c| [
+      id: c.id, 
+      finish_date: c.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract_number, 
+      title: c.title
+    ]}    
+    @due_standards = Contract.where('standard_finish_date < ?', Date.today + 2.month)
+    .map{|c| [
+      id: c.id, 
+      finish_date: c.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract_number, 
+      title: c.title
+    ]}   
+     @no_standards = Contract.where(standard: nil)
+     .map{|c| [
+      id: c.id, 
+      finish_date: c.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract_number, 
+      title: c.title
+    ]}
+    @no_insurances = Contract.where(insurance: nil)
+    .map{|c| [
+      id: c.id, 
+      finish_date: c.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract_number, 
+      title: c.title
+    ]}
+    
+    render json: {
+      due_contracts: @due_contracts,
+      due_insurances: @due_insurances,
+      due_standards: @due_standards,
+      no_standards: @no_standards,
+      no_insurances: @no_insurances,
+    }
+  end
+
   def denied_services
     @denied = DenyService.where(handled: false)
     render json: @denied

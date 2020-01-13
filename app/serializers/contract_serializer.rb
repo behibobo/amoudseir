@@ -5,7 +5,7 @@ class ContractSerializer < ActiveModel::Serializer
     :floors, :stops, :contract_number, :user, :customer, :service_day, :total_price, :usage,
     :towing_wire, :engine_room, :panel_type, :feedback, :engine_type, :car_communication,
     :capacity, :automatic_door_name, :serial_number, :panel_name,
-    :drive, :engine, :power, :insurance_date
+    :drive, :engine, :power, :insurance_date, :insurance_type
 
   def user
     ActiveModelSerializers::SerializableResource.new(object.user)
@@ -65,6 +65,10 @@ class ContractSerializer < ActiveModel::Serializer
 
   def car_communication
     Contract.car_communications[object.car_communication]
+  end
+
+  def insurance_type
+    Contract.insurance_types[object.insurance_type]
   end
   
 end

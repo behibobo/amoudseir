@@ -46,6 +46,6 @@ class StandardsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def standard_params
-      params.require(:standard).permit(:name)
+      params.require(:standard).permit(:name, :phone)
     end
 end
