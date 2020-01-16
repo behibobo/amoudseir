@@ -28,12 +28,30 @@ class DashboardController < ApplicationController
       user_services: @user_services
     }
 
+    repair = Service.where(status: :open).where(request_type: :repair)
+    repair_services = []
+
+    repair.each do |r|
+      hash = {id: r.id, contract_id: r.contract.id, title: r.contract.title, lat: r.contract.lat, lng: r.contract.lng}
+      repair_services.push(hash)
+    end
+
+    monthly = Service.where(status: :open).where(request_type: :monthly)
+    monthly_services = []
+
+    monthly.each do |r|
+      hash = {id: r.id, contract_id: r.contract.id, title: r.contract.title, lat: r.contract.lat, lng: r.contract.lng}
+      monthly_services.push(hash)
+    end
+
     render json: {
       today_services: ActiveModelSerializers::SerializableResource.new(@today_services),
       tomorrow_services: ActiveModelSerializers::SerializableResource.new(@tomorrow_services),
       today: today.to_s,
       tomorrow: tomorrow.to_s,
-      charts: charts
+      charts: charts,
+      repair: repair_services,
+      monthly: monthly_services
     }
   end
 

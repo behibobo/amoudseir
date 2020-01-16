@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200113163005) do
+ActiveRecord::Schema.define(version: 20200116153941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,9 @@ ActiveRecord::Schema.define(version: 20200113163005) do
     t.datetime "updated_at", null: false
     t.string "contract_number"
     t.integer "service_day", limit: 2
-    t.integer "insurance_type"
+    t.integer "standard_type"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "lng", precision: 10, scale: 6
     t.index ["customer_id"], name: "index_contracts_on_customer_id"
     t.index ["insurance_id"], name: "index_contracts_on_insurance_id"
     t.index ["standard_id"], name: "index_contracts_on_standard_id"

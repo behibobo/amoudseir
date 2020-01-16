@@ -56,13 +56,14 @@ end
         title: Faker::Name.name,
         description: Faker::Lorem.paragraph,
         service_day: Faker::Number.within(range: 1..30),
-        start_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
-        finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
+        start_date: Faker::Date.between(from: 2.years.ago, to: Date.today + 1.year),
+        finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today+ 1.year),
         standard_finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
         insurance_finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
         swing: Faker::Number.within(range: 1..10),
         automatic: Faker::Number.within(range: 1..10),
         standard_id: Standard.all.sample.id,
-        insurance_id: Insurance.all.sample.id
+        insurance_id: Insurance.all.sample.id,
+        standard_type: Faker::Number.within(range: 0..1),
     )
 end

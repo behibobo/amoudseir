@@ -48,18 +48,7 @@ class ServicesController < ApplicationController
   end
 
   def create_services
-    day = Date.today.to_pdate.day
-    contracts = Contract.all
-    contracts.each do |contract|
-      if day == contract.service_day
-        Service.create(
-          contract: contract,
-          request_type: 0,
-          user: contract.user,
-          status: 0
-        )
-      end
-    end
+    Contract.create_services
   end
 
   def complete_service
