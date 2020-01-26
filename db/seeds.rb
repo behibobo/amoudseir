@@ -1,12 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
 User.create!(
     username: "admin",
     first_name: "admin",
@@ -50,20 +41,30 @@ end
 end
 
 20.times do
-    Contract.create!(
+    con = Contract.create!(
         customer_id: 3,
         user_id: 2,
-        title: Faker::Name.name,
+        building_number: Faker::Name.name,
         description: Faker::Lorem.paragraph,
         service_day: Faker::Number.within(range: 1..30),
         start_date: Faker::Date.between(from: 2.years.ago, to: Date.today + 1.year),
         finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today+ 1.year),
-        standard_finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
-        insurance_finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
-        swing: Faker::Number.within(range: 1..10),
-        automatic: Faker::Number.within(range: 1..10),
-        standard_id: Standard.all.sample.id,
-        insurance_id: Insurance.all.sample.id,
-        standard_type: Faker::Number.within(range: 0..1),
+
+
+        
     )
+    1..2.times do
+        Elevator.create(
+            contract_id: con.id,
+            standard_finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
+            insurance_finish_date: Faker::Date.between(from: 2.years.ago, to: Date.today),
+            swing: Faker::Number.within(range: 1..10),
+            automatic: Faker::Number.within(range: 1..10),
+            standard_id: Standard.all.sample.id,
+            insurance_id: Insurance.all.sample.id,
+            standard_type: Faker::Number.within(range: 0..1),
+            elevator_type: Faker::Number.within(range: 0..1),
+        )    end
+    
+
 end

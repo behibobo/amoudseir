@@ -18,46 +18,21 @@ ActiveRecord::Schema.define(version: 20200116153941) do
   create_table "contracts", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "customer_id"
-    t.string "title"
+    t.string "building_number"
+    t.string "contract_number"
     t.string "description"
     t.date "start_date"
     t.date "finish_date"
+    t.integer "payment_type", limit: 2
     t.bigint "total_price"
     t.string "address"
-    t.bigint "insurance_id"
-    t.string "insurance_finish_date"
-    t.string "insurance_date"
-    t.bigint "standard_id"
-    t.string "standard_finish_date"
-    t.integer "swing"
-    t.integer "automatic"
-    t.integer "elevator_type", limit: 2
-    t.integer "floors", limit: 2
-    t.integer "stops", limit: 2
-    t.integer "usage", limit: 2
-    t.integer "capacity", limit: 2
-    t.string "automatic_door_name"
-    t.string "serial_number"
-    t.integer "towing_wire", limit: 2
-    t.integer "engine_room", limit: 2
-    t.integer "panel_type", limit: 2
-    t.string "panel_name"
-    t.string "drive"
-    t.integer "feedback", limit: 2
-    t.string "engine"
-    t.integer "engine_type", limit: 2
-    t.float "power"
-    t.integer "car_communication", limit: 2
+    t.integer "service_day", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "contract_number"
-    t.integer "service_day", limit: 2
-    t.integer "standard_type"
+    t.integer "insurance_type"
     t.decimal "lat", precision: 10, scale: 6
     t.decimal "lng", precision: 10, scale: 6
     t.index ["customer_id"], name: "index_contracts_on_customer_id"
-    t.index ["insurance_id"], name: "index_contracts_on_insurance_id"
-    t.index ["standard_id"], name: "index_contracts_on_standard_id"
     t.index ["user_id"], name: "index_contracts_on_user_id"
   end
 
@@ -89,6 +64,43 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.index ["deny_reason_id"], name: "index_deny_services_on_deny_reason_id"
     t.index ["service_id"], name: "index_deny_services_on_service_id"
     t.index ["user_id"], name: "index_deny_services_on_user_id"
+  end
+
+  create_table "elevators", force: :cascade do |t|
+    t.bigint "contract_id"
+    t.string "serial_number"
+    t.integer "elevator_type", limit: 2
+    t.integer "usage", limit: 2
+    t.integer "capacity", limit: 2
+    t.integer "floors", limit: 2
+    t.integer "stops", limit: 2
+    t.integer "swing", limit: 2
+    t.integer "automatic", limit: 2
+    t.string "door_type"
+    t.string "door_name"
+    t.integer "engine_room", limit: 2
+    t.integer "suspension_type", limit: 2
+    t.integer "engine_type", limit: 2
+    t.string "engine"
+    t.float "power"
+    t.integer "panel_type", limit: 2
+    t.string "panel_name"
+    t.string "drive"
+    t.integer "feedback", limit: 2
+    t.integer "car_communication", limit: 2
+    t.integer "speed", limit: 2
+    t.integer "emergency_system", limit: 2
+    t.bigint "insurance_id"
+    t.string "insurance_finish_date"
+    t.string "insurance_date"
+    t.bigint "standard_id"
+    t.string "standard_finish_date"
+    t.integer "standard_type", limit: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contract_id"], name: "index_elevators_on_contract_id"
+    t.index ["insurance_id"], name: "index_elevators_on_insurance_id"
+    t.index ["standard_id"], name: "index_elevators_on_standard_id"
   end
 
   create_table "insurances", force: :cascade do |t|
@@ -180,8 +192,6 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.string "cell"
   end
 
-  add_foreign_key "contracts", "insurances"
-  add_foreign_key "contracts", "standards"
   add_foreign_key "contracts", "users"
   add_foreign_key "contracts", "users", column: "customer_id"
   add_foreign_key "customer_transactions", "contracts"
@@ -189,6 +199,9 @@ ActiveRecord::Schema.define(version: 20200116153941) do
   add_foreign_key "deny_services", "deny_reasons"
   add_foreign_key "deny_services", "services"
   add_foreign_key "deny_services", "users"
+  add_foreign_key "elevators", "contracts"
+  add_foreign_key "elevators", "insurances"
+  add_foreign_key "elevators", "standards"
   add_foreign_key "message_statuses", "messages"
   add_foreign_key "message_statuses", "users"
   add_foreign_key "messages", "users", column: "to_id"
