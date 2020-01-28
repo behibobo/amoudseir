@@ -2,6 +2,7 @@ class CreateElevators < ActiveRecord::Migration[5.1]
   def change
     create_table :elevators do |t|
       t.references :contract, foreign_key: true
+      t.string :name, null: true
       t.string :serial_number, null: true
       t.integer :elevator_type, limit: 1
       t.integer :usage, limit: 1
@@ -10,7 +11,7 @@ class CreateElevators < ActiveRecord::Migration[5.1]
       t.integer :stops, limit: 1
       t.integer :swing, limit: 1
       t.integer :automatic, limit: 1
-      t.string :door_type, null: true
+      t.integer :door_type, limit: 1
       t.string :door_name, null: true
       t.integer :engine_room, limit: 1, null: true
       t.integer :suspension_type, limit: 1, null: true
@@ -22,7 +23,7 @@ class CreateElevators < ActiveRecord::Migration[5.1]
       t.string :drive, null: true
       t.integer :feedback, limit: 1, null: true
       t.integer :car_communication, limit: 1, null: true
-      t.integer :speed, limit: 1
+      t.string :speed, null: true
       t.integer :emergency_system, limit: 1
       t.references :insurance, foreign_key: true
       t.string :insurance_finish_date, null: true

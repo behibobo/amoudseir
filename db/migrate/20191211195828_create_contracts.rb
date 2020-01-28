@@ -12,7 +12,8 @@ class CreateContracts < ActiveRecord::Migration[5.1]
       t.integer :total_price, limit: 8
       t.string :address
       t.integer :service_day, limit: 1
-      
+      t.integer :stops, limit: 1
+
 
       t.timestamps
     end

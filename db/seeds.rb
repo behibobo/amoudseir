@@ -64,7 +64,9 @@ end
             insurance_id: Insurance.all.sample.id,
             standard_type: Faker::Number.within(range: 0..1),
             elevator_type: Faker::Number.within(range: 0..1),
-        )    end
+            emergency_system: Faker::Number.within(range: 0..2),
+        )    
+    end
     
 
 end

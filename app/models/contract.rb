@@ -3,8 +3,9 @@ class Contract < ApplicationRecord
   belongs_to :customer, class_name: 'User'
 
   has_many :services
-  has_many :elevators
+  has_many :elevators, dependent: :destroy
 
+  enum payment_type: [:cash, :cheque]
 
   def self.create_services
     day = Date.today.to_pdate.day

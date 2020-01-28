@@ -24,7 +24,41 @@ class ContractsController < ApplicationController
   # POST /contracts
   def create
     @contract = Contract.new(contract_params)
-    if @contract.save
+    if @contract.save!
+      params[:elevators].each do |el|
+          Elevator.create(
+            contract_id: @contract.id,
+            name: el[:name], 
+            serial_number: el[:serial_number], 
+            elevator_type: el[:elevator_type], 
+            usage: el[:usage], 
+            capacity: el[:capacity], 
+            floors: el[:floors], 
+            stops: el[:stops], 
+            swing: el[:swing], 
+            automatic: el[:automatic], 
+            door_type: el[:door_type], 
+            door_name: el[:door_name], 
+            engine_room: el[:engine_room], 
+            suspension_type: el[:suspension_type], 
+            engine_type: el[:engine_type], 
+            engine: el[:engine], 
+            power: el[:power], 
+            panel_type: el[:panel_type], 
+            panel_name: el[:napanel_nameme], 
+            drive: el[:drive], 
+            feedback: el[:feedback], 
+            car_communication: el[:car_communication], 
+            speed: el[:speed], 
+            emergency_system: el[:emergency_system], 
+            insurance_id: el[:insurance_id], 
+            insurance_finish_date: el[:insurance_finish_date], 
+            insurance_date: el[:insurance_date], 
+            standard_id: el[:standard_id], 
+            standard_finish_date: el[:standard_finish_date], 
+            standard_type: el[:standard_type]
+          )
+      end
       render json: @contract, status: :created, location: @contract
     else
       render json: @contract.errors, status: :unprocessable_entity
@@ -34,6 +68,41 @@ class ContractsController < ApplicationController
   # PATCH/PUT /contracts/1
   def update
     if @contract.update(contract_params)
+      @contract.elevators.destroy_all
+      params[:elevators].each do |el|
+        Elevator.create(
+          contract_id: @contract.id,
+          name: el[:name], 
+          serial_number: el[:serial_number], 
+          elevator_type: el[:elevator_type], 
+          usage: el[:usage], 
+          capacity: el[:capacity], 
+          floors: el[:floors], 
+          stops: el[:stops], 
+          swing: el[:swing], 
+          automatic: el[:automatic], 
+          door_type: el[:door_type], 
+          door_name: el[:door_name], 
+          engine_room: el[:engine_room], 
+          suspension_type: el[:suspension_type], 
+          engine_type: el[:engine_type], 
+          engine: el[:engine], 
+          power: el[:power], 
+          panel_type: el[:panel_type], 
+          panel_name: el[:napanel_nameme], 
+          drive: el[:drive], 
+          feedback: el[:feedback], 
+          car_communication: el[:car_communication], 
+          speed: el[:speed], 
+          emergency_system: el[:emergency_system], 
+          insurance_id: el[:insurance_id], 
+          insurance_finish_date: el[:insurance_finish_date], 
+          insurance_date: el[:insurance_date], 
+          standard_id: el[:standard_id], 
+          standard_finish_date: el[:standard_finish_date], 
+          standard_type: el[:standard_type]
+        )
+    end
       render json: @contract
     else
       render json: @contract.errors, status: :unprocessable_entity
@@ -54,15 +123,9 @@ class ContractsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def contract_params
       params.require(:contract).permit(
-        :title, :user_id, :customer_id, 
-        :description, :start_date, :finish_date, 
-        :total_price, :address, :insurance_id, 
-        :insurance_finish_date, :standard_id, 
-        :standard_finish_date, :swing, :automatic, 
-        :elevator_type, :floors, :stops, :service_day, 
-        :usage, :capacity, :automatic_door_name, :serial_number,
-        :towing_wire, :engine_room, :panel_type, :panel_name,
-        :drive, :feedback, :engine, :engine_type, :power, :car_communication,
-        :contract_number, :insurance_date, :standard_type, :lat, :lng)
+        :building_number, :user_id, :customer_id, :contract_number,
+        :description, :start_date, :finish_date, :service_day, :stops,
+        :total_price, :address, :payment_type, :lat, :lng
+      )
     end
 end

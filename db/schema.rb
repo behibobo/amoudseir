@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.bigint "total_price"
     t.string "address"
     t.integer "service_day", limit: 2
+    t.integer "stops", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "insurance_type"
@@ -68,6 +69,7 @@ ActiveRecord::Schema.define(version: 20200116153941) do
 
   create_table "elevators", force: :cascade do |t|
     t.bigint "contract_id"
+    t.string "name"
     t.string "serial_number"
     t.integer "elevator_type", limit: 2
     t.integer "usage", limit: 2
@@ -76,7 +78,7 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.integer "stops", limit: 2
     t.integer "swing", limit: 2
     t.integer "automatic", limit: 2
-    t.string "door_type"
+    t.integer "door_type", limit: 2
     t.string "door_name"
     t.integer "engine_room", limit: 2
     t.integer "suspension_type", limit: 2
@@ -88,7 +90,7 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.string "drive"
     t.integer "feedback", limit: 2
     t.integer "car_communication", limit: 2
-    t.integer "speed", limit: 2
+    t.string "speed"
     t.integer "emergency_system", limit: 2
     t.bigint "insurance_id"
     t.string "insurance_finish_date"
