@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   enum role: [:admin, :technician, :customer]
   enum status: [:active, :inactive]
+  enum gender: [:male, :female]
 
   has_many :customer_contracts, foreign_key: "customer_id", class_name: "Contract"
   has_many :technician_contracts, foreign_key: "user_id", class_name: "Contract"

@@ -5,7 +5,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :last_name
       t.string :username
       t.string :password_digest
-      t.integer :role
+      t.integer :role, limit: 1
+      t.integer :gender, limit: 1
       t.timestamps
     end
   end
