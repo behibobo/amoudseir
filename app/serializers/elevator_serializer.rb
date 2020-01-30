@@ -21,6 +21,10 @@ class ElevatorSerializer < ActiveModel::Serializer
     Elevator.elevator_types[object.elevator_type]
   end
 
+  def door_type
+    Elevator.door_types[object.door_type]
+  end
+
   def usage
     Elevator.usages[object.usage]
   end
