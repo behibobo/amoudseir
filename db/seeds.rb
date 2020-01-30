@@ -4,7 +4,8 @@ User.create!(
     last_name: "admin",
     password: "password",
     role: 0,
-    status: 0
+    status: 0,
+    gender: 0,
 )
 
 User.create!(
@@ -13,7 +14,9 @@ User.create!(
     last_name: "technician",
     password: "password",
     role: 1,
-    status: 0
+    status: 0,
+    gender: 0,
+
 )
 
 User.create!(
@@ -22,5 +25,6 @@ User.create!(
     last_name: "customer",
     password: "password",
     role: 2,
-    status: 0
+    status: 0,
+    gender: 0,
 )
