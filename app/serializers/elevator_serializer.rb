@@ -6,15 +6,15 @@ class ElevatorSerializer < ActiveModel::Serializer
   :drive, :engine, :power, :insurance_date, :standard_type, :emergency_system,
 
   def standard_finish_date_shamsi
-    object.standard_finish_date.to_date.to_pdate.to_s if object.standard_finish_date
+    object.standard_finish_date.to_date.to_pdate.to_s unless object.standard_finish_date.nil?
   end
 
   def insurance_date_shamsi
-    object.insurance_date.to_date.to_pdate.to_s if object.insurance_date
+    object.insurance_date.to_date.to_pdate.to_s unless object.insurance_date.nil?
   end
 
   def insurance_finish_date_shamsi
-    object.insurance_finish_date.to_date.to_pdate.to_s if object.insurance_finish_date
+    object.insurance_finish_date.to_date.to_pdate.to_s unless object.insurance_finish_date.nil?
   end
 
   def elevator_type

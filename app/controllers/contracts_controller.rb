@@ -52,10 +52,10 @@ class ContractsController < ApplicationController
             speed: el[:speed], 
             emergency_system: el[:emergency_system], 
             insurance_id: el[:insurance_id], 
-            insurance_finish_date: el[:insurance_finish_date], 
-            insurance_date: el[:insurance_date], 
+            insurance_finish_date: (el[:insurance_finish_date] == "")? nil : el[:insurance_finish_date], 
+            insurance_date: (el[:insurance_date] == "")? nil : el[:insurance_date], 
             standard_id: el[:standard_id], 
-            standard_finish_date: el[:standard_finish_date], 
+            standard_finish_date: (el[:standard_finish_date] == "")? nil : el[:standard_finish_date],  
             standard_type: el[:standard_type]
           )
       end
@@ -96,10 +96,10 @@ class ContractsController < ApplicationController
           speed: el[:speed], 
           emergency_system: el[:emergency_system], 
           insurance_id: el[:insurance_id], 
-          insurance_finish_date: el[:insurance_finish_date], 
-          insurance_date: el[:insurance_date], 
+          insurance_finish_date: (el[:insurance_finish_date] == "")? nil : el[:insurance_finish_date], 
+          insurance_date: (el[:insurance_date] == "")? nil : el[:insurance_date], 
           standard_id: el[:standard_id], 
-          standard_finish_date: el[:standard_finish_date], 
+          standard_finish_date: (el[:standard_finish_date] == "")? nil : el[:standard_finish_date], 
           standard_type: el[:standard_type]
         )
     end

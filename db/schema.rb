@@ -187,7 +187,8 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.string "last_name"
     t.string "username"
     t.string "password_digest"
-    t.integer "role"
+    t.integer "role", limit: 2
+    t.integer "gender", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status"
