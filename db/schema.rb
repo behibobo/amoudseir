@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200116153941) do
+ActiveRecord::Schema.define(version: 20200204121717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20200116153941) do
     t.integer "payment_type", limit: 2
     t.bigint "total_price"
     t.string "address"
-    t.integer "service_day", limit: 2
+    t.string "service_day"
     t.integer "stops", limit: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
