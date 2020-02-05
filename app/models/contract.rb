@@ -1,6 +1,6 @@
 class Contract < ApplicationRecord
-  belongs_to :user, class_name: 'User'
-  belongs_to :customer, class_name: 'User'
+  belongs_to :user, class_name: 'User', optional: true
+  belongs_to :customer, class_name: 'User', optional: true
 
   has_many :services
   has_many :elevators, dependent: :destroy

@@ -4,15 +4,15 @@ class CreateElevators < ActiveRecord::Migration[5.1]
       t.references :contract, foreign_key: true
       t.string :name, null: true
       t.string :serial_number, null: true
-      t.integer :elevator_type, limit: 1
-      t.integer :usage, limit: 1
-      t.integer :capacity, limit: 1
-      t.integer :floors, limit: 1
-      t.integer :stops, limit: 1
-      t.integer :swing, limit: 1
-      t.integer :automatic, limit: 1
-      t.integer :door_type, limit: 1
-      t.string :door_name, null: true
+      t.integer :elevator_type, limit: 1, null: true
+      t.integer :usage, limit: 1, null: true
+      t.integer :capacity, limit: 1, null: true
+      t.integer :floors, limit: 1, null: true
+      t.integer :stops, limit: 1, null: true
+      t.integer :swing, limit: 1, null: true
+      t.integer :automatic, limit: 1, null: true
+      t.integer :door_type, limit: 1, null: true
+      t.string :door_name, null: true, null: true
       t.integer :engine_room, limit: 1, null: true
       t.integer :suspension_type, limit: 1, null: true
       t.integer :engine_type, limit: 1, null: true
@@ -30,7 +30,7 @@ class CreateElevators < ActiveRecord::Migration[5.1]
       t.string :insurance_date, null: true
       t.references :standard, foreign_key: true
       t.string :standard_finish_date, null: true
-      t.integer :standard_type, limit: 1
+      t.integer :standard_type, limit: 1, null: true
       t.timestamps
     end
   end
