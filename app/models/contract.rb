@@ -10,7 +10,7 @@ class Contract < ApplicationRecord
   def self.create_services
     day = Date.today.to_pdate.day
     self.all.each do |contract|
-      if day == contract.service_day
+      if contract.service_day.split(",").include?(day.to_s)
         Service.where(
           contract: contract,
           request_type: 0,

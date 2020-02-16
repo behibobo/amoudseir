@@ -1,10 +1,10 @@
 class DashboardController < ApplicationController
   def index
-    today = Date.today.to_pdate.day
-    tomorrow = Date.tomorrow.to_pdate.day
+    today = Date.today.to_pdate.day.to_s
+    tomorrow = Date.tomorrow.to_pdate.day.to_s
 
-    @today_services = Contract.where(service_day: today)
-    @tomorrow_services = Contract.where(service_day: tomorrow)
+    @today_services = Contract.select {|c|c.service_day.split(",").include?(today)}
+    @tomorrow_services = Contract.select {|c|c.service_day.split(",").include?(tomorrow)}
 
     contracts = Contract.all
     @services = []
@@ -32,7 +32,7 @@ class DashboardController < ApplicationController
     repair_services = []
 
     repair.each do |r|
-      hash = {id: r.id, contract_id: r.contract.id, title: r.contract.title, lat: r.contract.lat, lng: r.contract.lng}
+      hash = {id: r.id, contract_id: r.contract.id, building_number: r.contract.building_number, lat: r.contract.lat, lng: r.contract.lng}
       repair_services.push(hash)
     end
 
@@ -40,7 +40,7 @@ class DashboardController < ApplicationController
     monthly_services = []
 
     monthly.each do |r|
-      hash = {id: r.id, contract_id: r.contract.id, title: r.contract.title, lat: r.contract.lat, lng: r.contract.lng}
+      hash = {id: r.id, contract_id: r.contract.id, building_number: r.contract.building_number, lat: r.contract.lat, lng: r.contract.lng}
       monthly_services.push(hash)
     end
 
@@ -61,36 +61,38 @@ class DashboardController < ApplicationController
       id: c.id, 
       finish_date: c.finish_date.to_date.to_pdate.to_s, 
       contract_number: c.contract_number, 
-      title: c.title
+      building_number: c.building_number
     ]}
-    @due_insurances = Contract.where('insurance_finish_date < ?', Date.today + 1.month)
+
+    @due_insurances =  Elevator.where('insurance_finish_date < ?', Date.today + 1.month)
+    .map {|c| [
+      id: c.contract.id, 
+      finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract.contract_number, 
+      building_number: c.contract.building_number
+    ]}
+
+    @due_standards = Elevator.where('standard_finish_date < ?', Date.today + 1.month)
     .map{|c| [
-      id: c.id, 
-      finish_date: c.finish_date.to_date.to_pdate.to_s, 
-      contract_number: c.contract_number, 
-      title: c.title
-    ]}    
-    @due_standards = Contract.where('standard_finish_date < ?', Date.today + 2.month)
-    .map{|c| [
-      id: c.id, 
-      finish_date: c.finish_date.to_date.to_pdate.to_s, 
-      contract_number: c.contract_number, 
-      title: c.title
+      id: c.contract.id, 
+      finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract.contract_number, 
+      building_number: c.contract.building_number
     ]}   
-     @no_standards = Contract.where(standard: nil)
+     @no_standards = Elevator.where(standard: nil)
      .map{|c| [
-      id: c.id, 
-      finish_date: c.finish_date.to_date.to_pdate.to_s, 
-      contract_number: c.contract_number, 
-      title: c.title
-    ]}
-    @no_insurances = Contract.where(insurance: nil)
+       id: c.contract.id, 
+       finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
+       contract_number: c.contract.contract_number, 
+       building_number: c.contract.building_number
+     ]}  
+    @no_insurances = Elevator.where(insurance: nil)
     .map{|c| [
-      id: c.id, 
-      finish_date: c.finish_date.to_date.to_pdate.to_s, 
-      contract_number: c.contract_number, 
-      title: c.title
-    ]}
+      id: c.contract.id, 
+      finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
+      contract_number: c.contract.contract_number, 
+      building_number: c.contract.building_number
+    ]}  
     
     render json: {
       due_contracts: @due_contracts,
