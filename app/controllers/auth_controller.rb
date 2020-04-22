@@ -6,12 +6,14 @@ class AuthController < ApplicationController
     end
 
     def reset_password
-      if current_user.authenticate(params[:password])
-        current_user.password = params[:new_password]
-        current_user.save
-        render json: {}
-      end
-      render json: {}, status: :unauthorized
+      user = User.find(current_user.id)
+      unless user.authenticate(params[:old_password])
+        render json: {}, status: :unauthorized
+        return 
+      end 
+      user.password = params[:password]
+      user.save
+      render json: user
     end
 
     private
