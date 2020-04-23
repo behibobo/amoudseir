@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: amoudseir_development
   pool: 5
-  username: bobo
+  username: behzad
   password: p@ssw0rd
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ test:
   encoding: unicode
   database: amoudseir_test
   pool: 5
-  username: bobo
+  username: behzad
   password: p@ssw0rd
 
 production:
@@ -51,5 +51,5 @@ production:
   encoding: unicode
   database: amoudseir_production
   pool: 5
-  username: bobo
+  username: behzad
   password: p@ssw0rd

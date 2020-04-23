@@ -8,10 +8,10 @@ class User < ApplicationRecord
   enum status: [:active, :inactive]
   enum gender: [:male, :female]
 
-  has_many :customer_contracts, foreign_key: "customer_id", class_name: "Contract"
-  has_many :technician_contracts, foreign_key: "user_id", class_name: "Contract"
-  has_many :messages, foreign_key: "to_id", class_name: "Message"
-  has_many :services, foreign_key: "user_id", class_name: "Service"
+  has_many :customer_contracts, foreign_key: "customer_id", class_name: "Contract", dependent: :destroy
+  has_many :technician_contracts, foreign_key: "user_id", class_name: "Contract", dependent: :destroy
+  has_many :messages, foreign_key: "to_id", class_name: "Message", dependent: :destroy
+  has_many :services, foreign_key: "user_id", class_name: "Service", dependent: :destroy
   #encrypt password
   has_secure_password
 

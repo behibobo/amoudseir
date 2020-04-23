@@ -2,7 +2,7 @@ class Contract < ApplicationRecord
   belongs_to :user, class_name: 'User', optional: true
   belongs_to :customer, class_name: 'User', optional: true
 
-  has_many :services
+  has_many :services, dependent: :destroy
   has_many :elevators, dependent: :destroy
 
   enum payment_type: [:cash, :cheque]
