@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   post 'dashboard/assign_user', to: 'dashboard#assign_user'
   get 'dashboard/chart', to: 'dashboard#chart'
   get 'dashboard/contracts', to: 'dashboard#contracts'
+  get 'dashboard/pusher', to: 'dashboard#pusher'
 end

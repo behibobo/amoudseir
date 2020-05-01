@@ -128,4 +128,18 @@ class DashboardController < ApplicationController
     end
     render json: { services: @services.to_json }
   end
+
+  def pusher
+    pusher = Pusher::Client.new(
+      app_id: '993431',
+      key: '3b050ecb9119950ddc2b',
+      secret: 'c8c87e40589fdfbacfdd',
+      cluster: 'ap2',
+      encrypted: true
+    )
+    
+    pusher.trigger('my-channel', 'my-event', {
+      message: 'hello world'
+    })
+  end
 end
