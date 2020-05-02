@@ -130,16 +130,19 @@ class DashboardController < ApplicationController
   end
 
   def pusher
-    pusher = Pusher::Client.new(
-      app_id: '993431',
-      key: '3b050ecb9119950ddc2b',
-      secret: 'c8c87e40589fdfbacfdd',
-      cluster: 'ap2',
-      encrypted: true
-    )
-    
-    pusher.trigger('my-channel', 'my-event', {
-      message: 'hello world'
-    })
+    fcm = FCM.new('AAAApe0tnzk:APA91bFppdbmBNvhPKgBHlJTl7Tg041ZtsYOt6wAgQlfz8g39WdBle_7C7A2JQ4T1pAlE2mXHeG7OkslWMBGABOPvqToZQos_wFMlHXAb_N3oL-QSLmdhX5Ytqqat72pE_ayyPXVdK3U')
+
+registration_ids= ["712648793913"] 
+
+options = {
+        priority: "high",
+        collapse_key: "updated_score", 
+        notification: {
+            title: "Message Title", 
+            body: "Hi, Worked perfectly",
+            icon: "myicon"}
+        }
+
+response = fcm.send(registration_ids, options)
   end
 end
