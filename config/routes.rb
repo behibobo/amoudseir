@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users
   get 'user/technicians',  to: 'users#technicians'
   get 'user/customers',  to: 'users#customers'
+  post 'user/update_firebase_token',  to: 'users#update_firebase_token'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   post 'auth/login', to: 'auth#login'

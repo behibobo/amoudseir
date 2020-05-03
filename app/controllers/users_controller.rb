@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    skip_before_action :authenticate_request
     before_action :set_user, only: [:show, :update, :destroy]
 
     def index
@@ -40,6 +39,11 @@ class UsersController < ApplicationController
 
     def destroy
       @user.destroy
+    end
+
+    def update_firebase_token
+      current_user.update(firebase_token: params[:firebase_token])
+      render json: current_user
     end
 
     private
