@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200204121717) do
+ActiveRecord::Schema.define(version: 20200503111325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20200204121717) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.string "cell"
+    t.string "firebase_token"
   end
 
   add_foreign_key "contracts", "users"

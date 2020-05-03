@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  skip_before_action :authenticate_request, only: %i[pusher]
+
   def index
     today = Date.today.to_pdate.day.to_s
     tomorrow = Date.tomorrow.to_pdate.day.to_s
@@ -132,7 +134,7 @@ class DashboardController < ApplicationController
   def pusher
     fcm = FCM.new('AAAApe0tnzk:APA91bFppdbmBNvhPKgBHlJTl7Tg041ZtsYOt6wAgQlfz8g39WdBle_7C7A2JQ4T1pAlE2mXHeG7OkslWMBGABOPvqToZQos_wFMlHXAb_N3oL-QSLmdhX5Ytqqat72pE_ayyPXVdK3U')
 
-registration_ids= ["712648793913"] 
+registration_ids= ["cL7eewh3GUIzbHnv_SbsR1:APA91bGDP6tRrK_vhrpRem6bIcALWDGKDGbeyxOVZmUEdKe3W7dJbQl0lF6iNoh2S00z8GnLKWrLv0zdDDNRgAgc-DAV-mrhGcOImwM6Q2iV0wnYdsliAZNu7oFSd-p_5ZXzm8lDp_m-"] 
 
 options = {
         priority: "high",
