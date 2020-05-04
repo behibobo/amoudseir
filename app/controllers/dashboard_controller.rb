@@ -134,7 +134,7 @@ class DashboardController < ApplicationController
   def pusher
     fcm = FCM.new('AAAApe0tnzk:APA91bFppdbmBNvhPKgBHlJTl7Tg041ZtsYOt6wAgQlfz8g39WdBle_7C7A2JQ4T1pAlE2mXHeG7OkslWMBGABOPvqToZQos_wFMlHXAb_N3oL-QSLmdhX5Ytqqat72pE_ayyPXVdK3U')
 
-registration_ids= ["cL7eewh3GUIzbHnv_SbsR1:APA91bGDP6tRrK_vhrpRem6bIcALWDGKDGbeyxOVZmUEdKe3W7dJbQl0lF6iNoh2S00z8GnLKWrLv0zdDDNRgAgc-DAV-mrhGcOImwM6Q2iV0wnYdsliAZNu7oFSd-p_5ZXzm8lDp_m-"] 
+registration_ids= ["eyTRyo0UypUsa0oiwm3I2Y:APA91bE8QXraqX6C0zCFlpLnCfgKUPQ_EPrdDmimoHeXfyoDQsUl5Ul8sXwkKgmTgShixS_j7K2aXDB5fooTR25DcbhyR5LvuQGb72C6i0q5_Zd7p3GV-butRcP1IjHZrmoMPS4oCsVx"] 
 
 options = {
         priority: "high",

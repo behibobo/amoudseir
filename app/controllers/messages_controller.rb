@@ -5,13 +5,13 @@ class MessagesController < ApplicationController
   def index
     @messages = Message.all
     if current_user.role == "customer"
-	@messages = @messages.where(to: current_user).or(Message.where(message_type: 'customer')).or(Message.where(message_type: 'everyone'))
+	    @messages = @messages.where(to: current_user).or(Message.where(message_type: 'customer')).or(Message.where(message_type: 'everyone'))
 
     elsif current_user.role == "technician"
-	@messages = @messages.where(to: current_user).or(Message.where(message_type: 'technician')).or(Message.where(message_type: 'everyone'))
+	    @messages = @messages.where(to: current_user).or(Message.where(message_type: 'technician')).or(Message.where(message_type: 'everyone'))
     end
     @total_records = @messages.count
-    @messages = @messages.paginate(page: params[:page], per_page: params[:page_size])
+      @messages = @messages.paginate(page: params[:page], per_page: params[:page_size])
     render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: @total_records }
   end
 
@@ -26,6 +26,12 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
 
     if @message.save
+      notification = {
+        title: @message.title,
+        body: @message.body,
+        icon: nil
+      }
+      Notify.group(@message.message_type.to_s, notification)
       render json: @message, status: :created, location: @message
     else
       render json: @message.errors, status: :unprocessable_entity
