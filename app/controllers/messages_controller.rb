@@ -31,7 +31,8 @@ class MessagesController < ApplicationController
         body: @message.body,
         icon: nil
       }
-      Notify.group(@message.message_type.to_s, notification)
+
+      Notify::group(@message.message_type.to_s, notification)
       render json: @message, status: :created, location: @message
     else
       render json: @message.errors, status: :unprocessable_entity

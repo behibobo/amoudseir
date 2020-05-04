@@ -1,6 +1,6 @@
 class Notify
   class << self
-    def user(to, notification)
+    def user(to, obj)
       fcm = FCM.new('AAAApe0tnzk:APA91bFppdbmBNvhPKgBHlJTl7Tg041ZtsYOt6wAgQlfz8g39WdBle_7C7A2JQ4T1pAlE2mXHeG7OkslWMBGABOPvqToZQos_wFMlHXAb_N3oL-QSLmdhX5Ytqqat72pE_ayyPXVdK3U')
 
       registration_ids= [to] 
@@ -9,14 +9,15 @@ class Notify
               priority: "high",
               collapse_key: "updated_score", 
               notification: {
-                  title: notification.title, 
-                  body: notification.body,
-                  icon: notification.icon}
+                title: obj[:title], 
+                body: obj[:body],
+                icon: obj[:icon]
               }
+            }
       response = fcm.send(registration_ids, options)
     end
 
-    def group(group_type, notification)
+    def group(group_type, obj)
       fcm = FCM.new('AAAApe0tnzk:APA91bFppdbmBNvhPKgBHlJTl7Tg041ZtsYOt6wAgQlfz8g39WdBle_7C7A2JQ4T1pAlE2mXHeG7OkslWMBGABOPvqToZQos_wFMlHXAb_N3oL-QSLmdhX5Ytqqat72pE_ayyPXVdK3U')
       registration_ids = []
       user = User.all
@@ -25,17 +26,18 @@ class Notify
       elsif group_type == 'customer'
         registration_ids = user.where(role: :customer).pluck(:firebase_token)
       else
-        user.pluck(:firebase_token)
+        registration_ids = user.pluck(:firebase_token)
       end
 
       options = {
               priority: "high",
               collapse_key: "updated_score", 
               notification: {
-                  title: notification.title, 
-                  body: notification.body,
-                  icon: notification.icon}
+                  title: obj[:title], 
+                  body: obj[:body],
+                  icon: obj[:icon]
               }
+            }
       response = fcm.send(registration_ids, options)
     end
   end
