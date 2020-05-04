@@ -11,12 +11,26 @@ class Contract < ApplicationRecord
     day = Date.today.to_pdate.day
     self.all.each do |contract|
       if contract.service_day.split(",").include?(day.to_s)
-        Service.where(
+        s = Service.where(
           contract: contract,
           request_type: 0,
           user: contract.user,
           status: 0
         ).first_or_create
+
+
+        Notify::user(s.user.firebase_token, {
+          title: "سرویس جدید",
+          body: "سرویس جدید",
+          icon: nil
+        })
+
+        Notify::user(s.contract.customer.firebase_token, {
+          title: "سرویس جدید",
+          body: "سرویس ماهانه برای تعمیر و نگهداری آسانسور برای امروز ثبت شده لطفا جهت تايید یا تغییر زمان به اپلیکیشن مراجعه کنید",
+          icon: nil
+        })
+
       end
     end
   end
