@@ -3,7 +3,6 @@ class User < ApplicationRecord
   validates_presence_of :first_name, :last_name, :username, :password_digest
   validates :username, uniqueness: true
 
-
   enum role: [:admin, :technician, :customer]
   enum status: [:active, :inactive]
   enum gender: [:male, :female]

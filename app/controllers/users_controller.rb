@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    skip_before_action :authenticate_request, only: %i[create show technicians customers]
     before_action :set_user, only: [:show, :update, :destroy]
 
     def index
