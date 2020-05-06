@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   get 'dashboard/chart', to: 'dashboard#chart'
   get 'dashboard/contracts', to: 'dashboard#contracts'
   get 'dashboard/pusher', to: 'dashboard#pusher'
+  get 'customer/dashboard', to: 'dashboard#customer_dashboard'
 end

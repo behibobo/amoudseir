@@ -1,5 +1,4 @@
 class DashboardController < ApplicationController
-  skip_before_action :authenticate_request, only: %i[pusher]
 
   def index
     today = Date.today
@@ -131,20 +130,10 @@ class DashboardController < ApplicationController
     render json: { services: @services.to_json }
   end
 
-  def pusher
-    fcm = FCM.new('AAAApe0tnzk:APA91bFppdbmBNvhPKgBHlJTl7Tg041ZtsYOt6wAgQlfz8g39WdBle_7C7A2JQ4T1pAlE2mXHeG7OkslWMBGABOPvqToZQos_wFMlHXAb_N3oL-QSLmdhX5Ytqqat72pE_ayyPXVdK3U')
-
-registration_ids= ["eyTRyo0UypUsa0oiwm3I2Y:APA91bE8QXraqX6C0zCFlpLnCfgKUPQ_EPrdDmimoHeXfyoDQsUl5Ul8sXwkKgmTgShixS_j7K2aXDB5fooTR25DcbhyR5LvuQGb72C6i0q5_Zd7p3GV-butRcP1IjHZrmoMPS4oCsVx"] 
-
-options = {
-        priority: "high",
-        collapse_key: "updated_score", 
-        notification: {
-            title: "Message Title", 
-            body: "Hi, Worked perfectly",
-            icon: "myicon"}
-        }
-
-response = fcm.send(registration_ids, options)
+  def customer_dashboard
+    contract_ids = Contract.where(customer: current_user).pluck(:id)
+    services = Service.where(contract_id: contract_ids)
+      .where(status: :open)
+    render json: services
   end
 end
