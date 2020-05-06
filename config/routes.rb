@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'service/open_services', to: 'services#open_services'
   post 'service/complete_service', to: 'services#complete_service'
   post 'service/deny_service', to: 'services#deny_service'
+  post 'service/delay_service', to: 'services#delay_service'
   get 'services', to: 'services#index'
   get 'services/:id', to: 'services#show'
   get 'dashboard', to: 'dashboard#index'

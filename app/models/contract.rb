@@ -15,7 +15,8 @@ class Contract < ApplicationRecord
           contract: contract,
           request_type: 0,
           user: contract.user,
-          status: 0
+          status: 0,
+          service_date: Date.today
         ).first_or_create
 
 

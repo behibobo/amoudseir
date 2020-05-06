@@ -8,6 +8,6 @@ class Service < ApplicationRecord
   has_many :service_parts, dependent: :destroy
 
   enum request_type: [:monthly, :repair]
-  enum status: [:open, :done, :paid, :denied]
+  enum status: [:open, :done, :paid, :denied, :delayed]
 
 end

@@ -86,4 +86,11 @@ class ServicesController < ApplicationController
 
     render json: @service
   end
+
+  def delay_service
+    @service = Service.find(params[:service_id])
+    @service.service_date = params[:service_date]
+    @service.save
+    render json: @service
+  end
 end

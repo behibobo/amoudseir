@@ -2,11 +2,11 @@ class DashboardController < ApplicationController
   skip_before_action :authenticate_request, only: %i[pusher]
 
   def index
-    today = Date.today.to_pdate.day.to_s
-    tomorrow = Date.tomorrow.to_pdate.day.to_s
+    today = Date.today
+    tomorrow = Date.tomorrow
 
-    @today_services = Contract.select {|c|c.service_day.split(",").include?(today)}
-    @tomorrow_services = Contract.select {|c|c.service_day.split(",").include?(tomorrow)}
+    @today_services = Service.where(service_date: today)
+    @tomorrow_services = Service.where(service_date: tomorrow)
 
     contracts = Contract.all
     @services = []

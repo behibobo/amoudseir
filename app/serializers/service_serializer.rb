@@ -1,5 +1,5 @@
 class ServiceSerializer < ActiveModel::Serializer
-  attributes :id, :request_type, :status, :user, :created_at, :customer, :contract, :items, :parts, :service_items, :total_price, :part_price, :service_price
+  attributes :id, :request_type, :status, :user, :created_at, :customer, :contract, :items, :parts, :service_items, :total_price, :part_price, :service_price, :service_date
 
   def user
     ActiveModelSerializers::SerializableResource.new(object.user)
@@ -35,6 +35,10 @@ class ServiceSerializer < ActiveModel::Serializer
 
   def created_at
     object.created_at.to_date.to_pdate.to_s
+  end
+
+  def created_date
+    object.created_date.to_date.to_pdate.to_s
   end
 
   def service_price
