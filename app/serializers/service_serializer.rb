@@ -41,6 +41,10 @@ class ServiceSerializer < ActiveModel::Serializer
     object.created_date.to_date.to_pdate.to_s
   end
 
+  def service_date
+    object.service_date.to_date.to_pdate.to_s
+  end
+
   def service_price
     (object.contract.total_price / 12)
   end
