@@ -33,7 +33,7 @@ class DashboardController < ApplicationController
     repair_services = []
 
     repair.each do |r|
-      hash = {id: r.id, customer: r.contract.customer.full_name, contract_id: r.contract.id, building_number: r.contract.building_number, lat: r.contract.lat, lng: r.contract.lng}
+      hash = {id: r.id, contract_number: r.contract.contract_number, customer: r.contract.customer.full_name, contract_id: r.contract.id, building_number: r.contract.building_number, lat: r.contract.lat, lng: r.contract.lng}
       repair_services.push(hash)
     end
 
@@ -41,7 +41,7 @@ class DashboardController < ApplicationController
     monthly_services = []
 
     monthly.each do |r|
-      hash = {id: r.id, customer: r.contract.customer.full_name, contract_id: r.contract.id, building_number: r.contract.building_number, lat: r.contract.lat, lng: r.contract.lng}
+      hash = {id: r.id, contract_number: r.contract.contract_number, customer: r.contract.customer.full_name, contract_id: r.contract.id, building_number: r.contract.building_number, lat: r.contract.lat, lng: r.contract.lng}
       monthly_services.push(hash)
     end
 
