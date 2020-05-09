@@ -43,12 +43,13 @@ class ServicesController < ApplicationController
       reason_id: params[:reason_id],
       request_type: 1,
       user_id: @contract.user.id,
+      service_date: Date.today,
       status: 0
     )
   end
 
   def create_services
-    Contract.create_services
+    Contract::create_services
   end
 
   def complete_service
