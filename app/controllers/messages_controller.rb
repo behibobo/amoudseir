@@ -11,8 +11,8 @@ class MessagesController < ApplicationController
 	    @messages = @messages.where(to: current_user).or(Message.where(message_type: 'technician')).or(Message.where(message_type: 'everyone'))
     end
     @total_records = @messages.count
-      @messages = @messages.paginate(page: params[:page], per_page: params[:page_size])
-    render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: @total_records }
+    @messages = @messages.paginate(page: params[:page], per_page: params[:page_size])
+    render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: @total_records, unread: 2 }
   end
 
   # GET /messages/1
