@@ -13,6 +13,8 @@
 # gem 'pg'
 #
 development:
+  host: 185.110.188.204
+  adapter: postgresql
   adapter: postgresql
   encoding: unicode
   database: amoudseir_development
@@ -47,7 +49,7 @@ test:
   password: p@ssw0rd
 
 production:
-  adapter: postgresql
+  host: 185.110.188.204
   encoding: unicode
   database: amoudseir_production
   pool: 5
