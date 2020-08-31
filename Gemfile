@@ -20,6 +20,8 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'rails_pdate'
 gem 'whenever', require: false
 gem 'fcm'
+gem 'redis'
+
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

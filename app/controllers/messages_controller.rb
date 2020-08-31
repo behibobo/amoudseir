@@ -33,8 +33,9 @@ class MessagesController < ApplicationController
         body: @message.body,
         icon: nil
       }
+      user_id = current_user.id.to_s
+      ActionCable.server.broadcast("notify_"+user_id,  message: notification)
 
-      Notify::group(@message.message_type.to_s, notification)
       render json: @message, status: :created, location: @message
     else
       render json: @message.errors, status: :unprocessable_entity

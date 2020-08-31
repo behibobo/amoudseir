@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :items
   resources :contracts
   resources :users
+
+  mount ActionCable.server, at: '/cable'
+
+
   get 'user/technicians',  to: 'users#technicians'
   get 'user/customers',  to: 'users#customers'
   post 'user/update_firebase_token',  to: 'users#update_firebase_token'

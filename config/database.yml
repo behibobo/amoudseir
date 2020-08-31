@@ -49,7 +49,7 @@ test:
   password: p@ssw0rd
 
 production:
-  host: 185.110.188.204
+  host: localhost
   encoding: unicode
   database: amoudseir_production
   pool: 5

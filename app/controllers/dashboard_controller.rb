@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
-  skip_before_action :authenticate_request
   def index
-    ActionCable.server.broadcast('amoud_notification', 'You have visited the welcome page.')
+    user_id = current_user.id.to_s
     today = Date.today
     tomorrow = Date.tomorrow
 
