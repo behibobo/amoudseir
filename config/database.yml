@@ -49,9 +49,9 @@ test:
   password: p@ssw0rd
 
 production:
-  host: 185.110.188.204
+  adapter: postgresql
   encoding: unicode
-  database: amoudseir_production
+  database: amoudseir_development
   pool: 5
   username: behzad
   password: p@ssw0rd
