@@ -19,16 +19,18 @@ class Contract < ApplicationRecord
           service_date: Date.today
         ).first_or_create
 
-
-        Notify::user(s.user.firebase_token, {
+        
+        user_id = contract.user.id.to_s
+        customer_id = contract.customer.id.to_s
+        ActionCable.server.broadcast("notify_"+user_id,  message: {
           title: "سرویس جدید",
           body: "سرویس جدید",
           icon: nil
         })
 
-        Notify::user(s.contract.customer.firebase_token, {
+        ActionCable.server.broadcast("notify_"+customer_id,  message: {
           title: "سرویس جدید",
-          body: "سرویس ماهانه برای تعمیر و نگهداری آسانسور برای امروز ثبت شده لطفا جهت تايید یا تغییر زمان به اپلیکیشن مراجعه کنید",
+          body: "سرویس جدید",
           icon: nil
         })
 
