@@ -15,7 +15,6 @@
 development:
   host: localhost
   adapter: postgresql
-  adapter: postgresql
   encoding: unicode
   database: amoudseir_development
   pool: 5
@@ -49,6 +48,7 @@ test:
   password: p@ssw0rd
 
 production:
+  adapter: postgresql
   encoding: unicode
   database: amoudseir_development
   pool: 5
