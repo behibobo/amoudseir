@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
         icon: nil
       }
       user_id = current_user.id.to_s
-      ActionCable.server.broadcast("notify_"+user_id,  message: notification)
+      # ActionCable.server.broadcast("notify_"+user_id,  message: notification)
 
       render json: @message, status: :created, location: @message
     else

@@ -22,17 +22,17 @@ class Contract < ApplicationRecord
         
         user_id = contract.user.id.to_s
         customer_id = contract.customer.id.to_s
-        ActionCable.server.broadcast("notify_"+user_id,  message: {
-          title: "سرویس جدید",
-          body: "سرویس جدید",
-          icon: nil
-        })
+        # ActionCable.server.broadcast("notify_"+user_id,  message: {
+        #   title: "سرویس جدید",
+        #   body: "سرویس جدید",
+        #   icon: nil
+        # })
 
-        ActionCable.server.broadcast("notify_"+customer_id,  message: {
-          title: "سرویس جدید",
-          body: "سرویس جدید",
-          icon: nil
-        })
+        # ActionCable.server.broadcast("notify_"+customer_id,  message: {
+        #   title: "سرویس جدید",
+        #   body: "سرویس جدید",
+        #   icon: nil
+        # })
 
       end
     end
