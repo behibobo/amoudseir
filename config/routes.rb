@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :contracts
   resources :users
 
-  mount ActionCable.server, at: '/cable'
+
 
 
   get 'user/technicians',  to: 'users#technicians'
