@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
   def index
+    pusher.trigger(current_user.id.to_s, 'event', message: 'test')
+
     user_id = current_user.id.to_s
     today = Date.today
     tomorrow = Date.tomorrow

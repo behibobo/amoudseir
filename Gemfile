@@ -19,8 +19,8 @@ gem 'faker'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rails_pdate'
 gem 'whenever', require: false
-gem 'fcm'
 gem 'redis'
+gem 'pusher'
 
 
 
