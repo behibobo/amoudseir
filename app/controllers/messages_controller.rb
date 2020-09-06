@@ -34,6 +34,7 @@ class MessagesController < ApplicationController
         icon: nil
       }
       user_id = current_user.id.to_s
+      pusher.trigger(user_id, 'event', message: notification)
 
       render json: @message, status: :created, location: @message
     else
