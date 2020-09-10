@@ -24,7 +24,7 @@ class Contract < ApplicationRecord
         customer_id = contract.customer.id.to_s
         
 
-        pusher.trigger(user_id, 'event', message: message: {
+        pusher.trigger(user_id, 'event', message: {
           title: "سرویس جدید",
           body: "سرویس جدید",
           icon: nil
