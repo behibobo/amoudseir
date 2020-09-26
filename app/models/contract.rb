@@ -5,6 +5,8 @@ class Contract < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :elevators, dependent: :destroy
 
+  validates :contract_number, uniqueness: true
+
   enum payment_type: [:cash, :cheque]
 
   def self.create_services
