@@ -1,12 +1,6 @@
 require 'pusher'
 
-pusher = Pusher::Client.new(
-  app_id: "735558",
-  key: "2a0e191a544c745780f0",
-  secret: "7fa58d449883d3e9c3bc",
-  cluster: "ap2",
-  use_tls: true
-)
+
 class Contract < ApplicationRecord
   belongs_to :user, class_name: 'User', optional: true
   belongs_to :customer, class_name: 'User', optional: true
@@ -20,6 +14,15 @@ class Contract < ApplicationRecord
   enum status: [:active, :archived]
 
   def self.create_services
+    
+    pusher = Pusher::Client.new(
+      app_id: "735558",
+      key: "2a0e191a544c745780f0",
+      secret: "7fa58d449883d3e9c3bc",
+      cluster: "ap2",
+      use_tls: true
+    )
+
     day = Date.tomorrow.to_pdate.day
     self.all.each do |contract|
       if contract.service_day.split(",").include?(day.to_s)
