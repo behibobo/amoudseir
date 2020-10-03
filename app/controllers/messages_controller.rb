@@ -1,4 +1,4 @@
-require "pusher"
+require 'pusher'
 
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :update, :destroy]

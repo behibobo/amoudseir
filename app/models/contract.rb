@@ -1,4 +1,4 @@
-require "pusher"
+require 'pusher'
 
 class Contract < ApplicationRecord
   belongs_to :user, class_name: 'User', optional: true
