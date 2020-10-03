@@ -8,9 +8,10 @@ class Contract < ApplicationRecord
   validates :contract_number, uniqueness: true
 
   enum payment_type: [:cash, :cheque]
+  enum status: [:active, :archived]
 
   def self.create_services
-    day = Date.today.to_pdate.day
+    day = Date.tomorrow.to_pdate.day
     self.all.each do |contract|
       if contract.service_day.split(",").include?(day.to_s)
         s = Service.where(
