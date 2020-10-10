@@ -18,6 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :runner_command, "rails runner"
 
 every 1.day, at: '8:00 pm' do
     runner "Contract.create_services"
