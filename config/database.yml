@@ -13,7 +13,7 @@
 # gem 'pg'
 #
 development:
-  host: 185.110.188.204
+  host: localhost
   adapter: postgresql
   encoding: unicode
   database: amoudseir_development
