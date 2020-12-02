@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    # user_id = current_user.id.to_s
+    user_id = current_user.id.to_s
     today = Date.today
     tomorrow = Date.tomorrow
 
