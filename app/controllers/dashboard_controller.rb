@@ -62,6 +62,8 @@ class DashboardController < ApplicationController
       id: c.id, 
       finish_date: c.finish_date.to_date.to_pdate.to_s, 
       contract_number: c.contract_number, 
+      customer: c.customer.full_name,
+      cell: c.customer.cell,
       building_number: c.building_number
     } }
 
@@ -70,7 +72,9 @@ class DashboardController < ApplicationController
       id: c.contract.id, 
       finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
       contract_number: c.contract.contract_number, 
-      building_number: c.contract.building_number
+      building_number: c.contract.building_number,
+      customer: c.customer.full_name,
+      cell: c.customer.cell,
     }}
 
     @due_standards = Elevator.where('standard_finish_date < ?', Date.today + 1.month)
@@ -78,21 +82,27 @@ class DashboardController < ApplicationController
       id: c.contract.id, 
       finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
       contract_number: c.contract.contract_number, 
-      building_number: c.contract.building_number
+      building_number: c.contract.building_number,
+      customer: c.customer.full_name,
+      cell: c.customer.cell,
     }}   
      @no_standards = Elevator.where(standard: nil)
      .map{|c| {
        id: c.contract.id, 
        finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
        contract_number: c.contract.contract_number, 
-       building_number: c.contract.building_number
+       building_number: c.contract.building_number,
+       customer: c.customer.full_name,
+      cell: c.customer.cell,
      }}  
     @no_insurances = Elevator.where(insurance: nil)
     .map{|c| {
       id: c.contract.id, 
       finish_date: c.contract.finish_date.to_date.to_pdate.to_s, 
       contract_number: c.contract.contract_number, 
-      building_number: c.contract.building_number
+      building_number: c.contract.building_number,
+      customer: c.customer.full_name,
+      cell: c.customer.cell,
     }}  
     
     render json: {
