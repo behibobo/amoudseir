@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
   # GET /messages/1
   def show
     status = MessageStatus.where(message: @message, user:current_user)
-    status.update(status: "seen")
+    status.update(status: :seed)
     render json: @message
   end
 
