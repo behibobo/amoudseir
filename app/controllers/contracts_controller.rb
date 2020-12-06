@@ -7,10 +7,10 @@ class ContractsController < ApplicationController
       @contracts = Contract.where(status: :active).order(:contract_number)
       @total_records = Contract.count
     elsif current_user.customer?
-      @contracts = current_user.where(status: :active).customer_contracts.order(:contract_number)
+      @contracts = current_user.customer_contracts.where(status: :active).order(:contract_number)
       @total_records = current_user.customer_contracts.count
     elsif current_user.technician?
-      @contracts = current_user.where(status: :active).technician_contracts.order(:contract_number)
+      @contracts = current_user.technician_contracts.where(status: :active).order(:contract_number)
       @total_records = current_user.technician_contracts.count
     end
 
