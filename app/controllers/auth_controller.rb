@@ -28,7 +28,7 @@ class AuthController < ApplicationController
           user_id: user.id,
           status: 0,
           open_services: user.services.where(status: :open).size,
-          unread_messages: Message.joins([:message_status, :to]).where(:users => {id: user.id}).where(:message_statuses => {status: :unread}).size
+          unread_messages: Message.where(to: user).where(status: :unread).count
         }
       else
         render json: { error: command.errors }, status: :unauthorized

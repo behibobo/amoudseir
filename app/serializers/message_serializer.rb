@@ -1,10 +1,5 @@
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :to, :title, :body, :status, :message_type, :created_at
-
-  def status
-    MessageStatus.statuses[object.message_status.status] unless object.message_status.nil?
-  end
-  
+  attributes :id, :to, :title, :body, :status, :message_type, :created_at  
 
   def message_type
     Message.message_types[object.message_type]

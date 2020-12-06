@@ -6,30 +6,22 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
-    if current_user.role == "customer"
-	    @messages = @messages.where(to: current_user).or(Message.where(message_type: 'customer')).or(Message.where(message_type: 'everyone'))
-
-    elsif current_user.role == "technician"
-	    @messages = @messages.where(to: current_user).or(Message.where(message_type: 'technician')).or(Message.where(message_type: 'everyone'))
-    end
+    @messages = Message.where(to: current_user)
     @total_records = @messages.count
-    ids = @messages.pluck(:id)
-    seen = MessageStatus.where(user: current_user).where(message_id: ids).where(status: :seen).count
+    unread = Message.where(to: current_user).where(status: :unread).count
     @messages = @messages.paginate(page: params[:page], per_page: params[:page_size])
-    render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: @total_records, unread: @messages.size - seen }
+    render json: {data: ActiveModelSerializers::SerializableResource.new(@messages), total_records: @total_records, unread: unread }
   end
 
   # GET /messages/1
   def show
-    status = MessageStatus.where(message: @message, user:current_user)
-    status.update(status: :seed)
+    @message.update(status: :seen)
     render json: @message
   end
 
   # POST /messages
   def create
-    @message = Message.new(message_params)
+    byebug
 
     pusher = Pusher::Client.new(
       app_id: "735558",
@@ -39,19 +31,32 @@ class MessagesController < ApplicationController
       use_tls: true
     )
     
-    if @message.save
-      notification = {
-        title: @message.title,
-        body: @message.body,
-        icon: nil
-      }
-      user_id = current_user.id.to_s
-      pusher.trigger(user_id, 'event', message: notification)
-
-      render json: @message, status: :created, location: @message
-    else
-      render json: @message.errors, status: :unprocessable_entity
+    users = User.all
+    if message_params[:message_type] == 1
+      users = users.where(role: :customer)
+    elsif message_params[:message_type] == 2
+      users = users.where(role: :technician)
     end
+
+    users.each do |user|
+      @message = Message.new(message_params)
+      @message.to = user
+
+      if @message.save
+        notification = {
+          title: @message.title,
+          body: @message.body,
+          icon: nil
+        }
+        user_id = current_user.id.to_s
+        pusher.trigger(user_id, 'event', message: notification)
+
+    end
+
+    end
+
+    render json: [], status: :created
+
   end
 
   # PATCH/PUT /messages/1
