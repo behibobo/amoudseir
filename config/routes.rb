@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   post 'service/delay_service', to: 'services#delay_service'
   get 'services', to: 'services#index'
   get 'services/:id', to: 'services#show'
-  get 'service/create_services' , to: 'contracts#create_today_services'
+  get 'service/create_today_services' , to: 'contracts#create_today_services'
   get 'dashboard', to: 'dashboard#index'
   get 'dashboard/denied', to: 'dashboard#denied_services'
   post 'dashboard/assign_user', to: 'dashboard#assign_user'
