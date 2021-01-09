@@ -21,6 +21,8 @@ gem 'rails_pdate'
 gem 'whenever', require: false
 gem 'redis'
 gem 'pusher'
+gem 'thin'
+
 
 
 
