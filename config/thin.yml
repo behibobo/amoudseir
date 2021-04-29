@@ -1,10 +1,10 @@
 ---
-chdir: "/Users/behzad/Documents/projects/AmoudSeir"
+chdir: "/home/behzad/AmoudSeir"
 environment: development
 address: 0.0.0.0
 port: 3003
 timeout: 30
-log: "/Users/behzad/Documents/projects/AmoudSeir/log/thin.log"
+log: "/home/behzad/AmoudSeir/log/thin.log"
 pid: tmp/pids/thin.pid
 max_conns: 1024
 max_persistent_conns: 100
