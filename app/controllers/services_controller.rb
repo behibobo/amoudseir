@@ -71,6 +71,8 @@ class ServicesController < ApplicationController
     end
 
     @service.status = :done
+    @service.lat = params[:lat] if params[:lat]
+    @service.lng = params[:lng] if params[:lng]
     @service.save
     render json: @service
   end
