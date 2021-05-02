@@ -22,6 +22,8 @@ gem 'whenever', require: false
 gem 'redis'
 gem 'pusher'
 gem 'thin'
+gem "figaro"
+
 
 
 
