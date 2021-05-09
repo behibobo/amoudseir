@@ -10,6 +10,14 @@ class Contract < ApplicationRecord
   enum payment_type: [:cash, :cheque]
   enum status: [:active, :archived]
 
+  def start_date_shamsi
+    self.start_date.to_date.to_pdate.to_s
+  end
+
+  def finish_date_shamsi
+    self.finish_date.to_date.to_pdate.to_s
+  end
+
   def self.create_services(tomorrow=false)
     
     puhser = PusherHelper::get_object

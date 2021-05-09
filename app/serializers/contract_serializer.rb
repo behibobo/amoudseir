@@ -1,6 +1,7 @@
 class ContractSerializer < ActiveModel::Serializer
   attributes :id, :user_id, :customer_id, :building_number, :description,
   :start_date, :finish_date, :total_price, :address, :payment_type, :stops,
+  :start_date_shamsi , :finish_date_shamsi,
      :contract_number, :user, :customer, :service_day,  :lat, :lng, :elevators, :dept
 
   def elevators
@@ -20,11 +21,11 @@ class ContractSerializer < ActiveModel::Serializer
   end
 
   def start_date_shamsi
-    object.start_date.to_date.to_pdate.to_s
+    object.start_date_shamsi
   end
 
   def finish_date_shamsi
-    object.finish_date.to_date.to_pdate.to_s
+    object.finish_date_shamsi
   end
     
 end
