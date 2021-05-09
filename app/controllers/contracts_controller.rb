@@ -131,7 +131,7 @@ class ContractsController < ApplicationController
       params.require(:contract).permit(
         :building_number, :user_id, :customer_id, :contract_number,
         :description, :start_date, :finish_date, :service_day, :stops,
-        :total_price, :address, :payment_type, :lat, :lng
+        :total_price, :address, :payment_type, :lat, :lng, :dept
       )
     end
 end

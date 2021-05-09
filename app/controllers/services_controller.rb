@@ -29,6 +29,11 @@ class ServicesController < ApplicationController
     render json: {data: ActiveModelSerializers::SerializableResource.new(@services), total_records: @total_records }
   end
 
+  def open_services_count
+    count = Service.where(user: current_user).where(status: 0).count
+    render json: {data: count }
+  end
+
   def show
     @service = Service.find(params[:id])
     @items = Item.all

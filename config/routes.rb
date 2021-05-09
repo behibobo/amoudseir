@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'service/request_repair', to: 'services#request_repair'
   get 'service/create_services', to: 'services#create_services'
   get 'service/open_services', to: 'services#open_services'
+  get 'service/open_services_count', to: 'services#open_services_count'
   post 'service/complete_service', to: 'services#complete_service'
   post 'service/deny_service', to: 'services#deny_service'
   post 'service/delay_service', to: 'services#delay_service'
