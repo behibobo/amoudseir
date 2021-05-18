@@ -22,7 +22,7 @@ class ServicesController < ApplicationController
 
   def open_services
     @services = Service.where(user: current_user)
-      .where(status: 0)
+      .where(status: :open)
       .paginate(page: params[:page], per_page: params[:page_size])
 
     @total_records = Service.where(contract_id: params[:contract_id]).count
@@ -35,7 +35,7 @@ class ServicesController < ApplicationController
   end
 
   def show
-    @service = Service.find(params[:id])
+    @service = Service.includes(:items).find(params[:id])
     @items = Item.all
     @reasons = DenyReason.all
     render json: {service: ActiveModelSerializers::SerializableResource.new(@service), items: @items, reasons: @reasons }

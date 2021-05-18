@@ -4,7 +4,7 @@ class ContractsController < ApplicationController
   # GET /contracts
   def index
     if current_user.admin?
-      @contracts = Contract.where(status: :active).order(:contract_number)
+      @contracts = Contract.includes(:elevators).where(status: :active).order(:contract_number)
       @total_records = Contract.count
     elsif current_user.customer?
       @contracts = current_user.customer_contracts.where(status: :active).order(:contract_number)
@@ -123,7 +123,7 @@ class ContractsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contract
-      @contract = Contract.find(params[:id])
+      @contract = Contract.includes([:elevators, :customer, :user]).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
