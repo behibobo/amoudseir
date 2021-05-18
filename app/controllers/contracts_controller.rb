@@ -18,7 +18,7 @@ class ContractsController < ApplicationController
     result = @contracts.paginate(page: params[:page], per_page: params[:per_page])
     render json: {
       result: result,
-      total_page: (@total_records.to_f / params[:per_page]).ceil
+      total_page: (@total_records.to_f / params[:per_page]).ceil,
       total_records: @total_records
     }
   end
