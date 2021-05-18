@@ -17,7 +17,7 @@ class ContractsController < ApplicationController
 
     result = @contracts.paginate(page: params[:page], per_page: params[:per_page])
     render json: {
-      result: result,
+      result: ActiveModelSerializers::SerializableResource.new(result),
       total_page: (@total_records.to_f / params[:per_page].to_f).ceil,
       total_records: @total_records
     }
