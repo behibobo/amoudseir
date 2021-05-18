@@ -3,6 +3,7 @@ class ContractsController < ApplicationController
 
   # GET /contracts
   def index
+
     if current_user.admin?
       @contracts = Contract.includes(:elevators).where(status: :active).order(:contract_number)
       @total_records = Contract.count
@@ -14,7 +15,8 @@ class ContractsController < ApplicationController
       @total_records = current_user.technician_contracts.count
     end
 
-    render json: {data: ActiveModelSerializers::SerializableResource.new(@contracts), total_records: @total_records }
+    result = @contracts.paginate(page: params[:page], per_page: params[:per_page])
+    render json: result
   end
 
   # GET /contracts/1
