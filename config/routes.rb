@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'services/:id', to: 'services#show'
   get 'service/create_today_services' , to: 'contracts#create_today_services'
   get 'dashboard', to: 'dashboard#index'
+  get 'dashboard/contract_report', to: 'dashboard#contract_report'
   get 'dashboard/denied', to: 'dashboard#denied_services'
   post 'dashboard/assign_user', to: 'dashboard#assign_user'
   get 'dashboard/chart', to: 'dashboard#chart'

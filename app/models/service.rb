@@ -10,4 +10,11 @@ class Service < ApplicationRecord
   enum request_type: [:monthly, :repair]
   enum status: [:open, :done, :paid, :denied, :delayed]
 
+  def service_total_price
+    price = self.contract.total_price
+    self.service_parts.each do |part|
+      price += (part.price * part.qty)
+    end
+    price
+  end
 end

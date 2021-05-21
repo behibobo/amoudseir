@@ -53,4 +53,27 @@ class Contract < ApplicationRecord
       end
     end
   end
+
+  def service_dept
+    self.services.where(status: :open).to_a.sum(&:service_total_price)
+  end
+
+  # def self.to_csv
+  #   file = "#{Rails.root}/public/contract.csv"
+  #   contracts = Contract.includes(:customer).order(:created_at)
+  #   headers = ["شماره قرارداد", "مشتری", "مبلغ قرارداد", "روزهای سرویس", "شماره تماس", "بدهی قبلی", "بدهی"]
+  #   CSV.open(file, 'w', write_headers: true, headers: headers, encoding: "UTF-8") do |writer|
+  #     contracts.each do |contract| 
+  #     writer << [
+  #       contract.contract_number, 
+  #       contract.customer.full_name, 
+  #       contract.total_price, 
+  #       contract.service_day,
+  #       contract.customer.cell,
+  #       contract.dept,
+  #       contract.service_dept
+  #     ] 
+  #     end
+  #   end
+  # end
 end

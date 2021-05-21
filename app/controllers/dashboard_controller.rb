@@ -56,6 +56,11 @@ class DashboardController < ApplicationController
     }
   end
 
+  def contract_report
+    contracts = Contract.includes(:customer).order(:created_at)
+    render json: ActiveModelSerializers::SerializableResource.new(contracts, each_serializer: LightContractSerializer).to_json
+  end
+
   def contracts
     @due_contracts = Contract.where('finish_date < ?', Date.today + 2.month)
     .map{|c| {
