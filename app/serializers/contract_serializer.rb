@@ -4,12 +4,10 @@ class ContractSerializer < ActiveModel::Serializer
   :start_date_shamsi , :finish_date_shamsi, :service_dept,
      :contract_number, :service_day,  :lat, :lng, :elevators, :dept
 
-  belongs_to :user, serializer: SingleUserSerializer
-  belongs_to :customer,  serializer: SingleUserSerializer
-
-  def elevators
-    ActiveModelSerializers::SerializableResource.new(object.elevators)
-  end
+  belongs_to :user
+  belongs_to :customer
+  has_many :elevators
+  
 
   def payment_type
     Contract.payment_types[object.payment_type]

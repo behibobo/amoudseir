@@ -20,8 +20,8 @@ class Contract < ApplicationRecord
 
   def self.create_services(tomorrow=false)
     
-    puhser = PusherHelper::get_object
-    
+    pusher = PusherHelper::get_object
+
     day = tomorrow ? Date.tomorrow.to_pdate.day : Date.today.to_pdate.day
     
     self.all.each do |contract|

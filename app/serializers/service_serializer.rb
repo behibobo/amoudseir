@@ -1,33 +1,32 @@
 class ServiceSerializer < ActiveModel::Serializer
-  attributes :id, :request_type, :status, :user, :created_at, :customer, :contract, :items, :parts, :service_items, :total_price, :part_price, :service_price, :service_date
+  attributes :id, :request_type, :status, :created_at, :user_name, :user_cell, :customer_name, :customer_cell, :total_price, :part_price, :service_price, :service_date
 
-  def user
-    ActiveModelSerializers::SerializableResource.new(object.user)
+  belongs_to :contract
+  belongs_to :reason
+  has_many :items
+  has_many :service_parts
+
+  def customer_name
+    object.contract.customer.full_name
   end
 
-  def items
-    object.items.pluck(:id)
+  def customer_cell
+    object.contract.customer.cell
   end
 
-  def service_items
-    object.items
+  def user_name
+    object.user.full_name
   end
 
-  def parts
-    object.service_parts
+  def user_cell
+    object.user.cell
   end
-
-  def customer
-    ActiveModelSerializers::SerializableResource.new(object.contract.customer)
-  end
+  
 
   def status
     Service.statuses[object.status]
   end
 
-  def contract
-    ActiveModelSerializers::SerializableResource.new(object.contract)
-  end
 
   def request_type
     Service.request_types[object.request_type]

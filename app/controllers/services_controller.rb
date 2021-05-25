@@ -38,7 +38,11 @@ class ServicesController < ApplicationController
     @service = Service.includes(:items).find(params[:id])
     @items = Item.all
     @reasons = DenyReason.all
-    render json: {service: ActiveModelSerializers::SerializableResource.new(@service), items: @items, reasons: @reasons }
+    render json: {
+      service: ActiveModelSerializers::SerializableResource.new(@service), 
+      items: @items, 
+      reasons: @reasons 
+    }
   end
 
   def request_repair
@@ -55,6 +59,7 @@ class ServicesController < ApplicationController
 
   def create_services
     Contract::create_services
+    Contract::create_services(true)
   end
 
   def complete_service

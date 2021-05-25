@@ -1,10 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :username, :role, :full_name, :cell, :gender, :firebase_token, :customer_contracts
-
-
-  def customer_contracts
-    object.customer_contracts
-  end
+  attributes :id, :first_name, :last_name, :username, :role, :full_name, :cell, :gender, :firebase_token
 
   def role
     User.roles[object.role]

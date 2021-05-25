@@ -1,16 +1,15 @@
 class DashboardController < ApplicationController
+  
   def index
     user_id = current_user.id.to_s
     today = Date.today
     tomorrow = Date.tomorrow
 
-    @today_services = Service.where(service_date: today)
-    @tomorrow_services = Service.where(service_date: tomorrow)
-
-    contracts = Contract.all
+    contracts = Contract.includes([:user, :customer]).all
+    
     @services = []
     (1..30).each do |item|
-      cnt = Contract.where(service_day: item).count
+      cnt = contracts.where(service_day: item).count
       hash = {key: item, value: cnt}
       @services.push hash
     end
@@ -19,7 +18,7 @@ class DashboardController < ApplicationController
     @user_services = []
 
     users.each do |user|
-      cnt = Service.where(status: "done").where(user: user).count
+      cnt = Service.includes(:user).where(status: "done").where(user: user).count
       hash = {key: user.full_name, value: cnt}
       @user_services.push(hash)
     end
@@ -28,6 +27,16 @@ class DashboardController < ApplicationController
       services: @services,
       user_services: @user_services
     }
+
+
+    render json: {
+      today: today.to_s,
+      tomorrow: tomorrow.to_s,
+      charts: charts,
+    }
+  end
+  
+  def map
 
     repair = Service.where(status: :open).where(request_type: :repair)
     repair_services = []
@@ -45,24 +54,22 @@ class DashboardController < ApplicationController
       monthly_services.push(hash)
     end
 
+
     render json: {
-      today_services: ActiveModelSerializers::SerializableResource.new(@today_services),
-      tomorrow_services: ActiveModelSerializers::SerializableResource.new(@tomorrow_services),
-      today: today.to_s,
-      tomorrow: tomorrow.to_s,
-      charts: charts,
       repair: repair_services,
       monthly: monthly_services
     }
   end
 
   def contract_report
-    contracts = Contract.includes(:customer).order(:created_at)
-    render json: ActiveModelSerializers::SerializableResource.new(contracts, each_serializer: LightContractSerializer).to_json
+    contracts = Contract.includes([:customer, :user, :services, :elevators]).order(:created_at)
+    render json: contracts
   end
 
   def contracts
-    @due_contracts = Contract.where('finish_date < ?', Date.today + 2.month)
+    contracts = Contract.includes([:elevators, :user, :customer]).order(:created_at)
+
+    @due_contracts = contracts.where('finish_date < ?', Date.today + 2.month)
     .map{|c| {
       id: c.id, 
       finish_date: c.finish_date.to_date.to_pdate.to_s, 
@@ -150,5 +157,28 @@ class DashboardController < ApplicationController
     services = Service.where(contract_id: contract_ids)
       .where(status: :open)
     render json: services
+  end
+
+
+
+
+  def services
+    today = Date.today
+    tomorrow =  Date.tomorrow
+
+    services = Service.includes([:contract, :service_parts, :user, contract: [:customer, :user]]).order(:created_at)
+
+    case params[:type]
+      when "today" 
+        services = services.where(service_date: today).where(status: :open)
+      when "tomorrow"
+        services = services.where(service_date: tomorrow).where(status: :open)
+      when "denied"
+        services = services.where(status: :denied)
+      else
+    end 
+
+    render json: services
+    
   end
 end

@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   get 'services', to: 'services#index'
   get 'services/:id', to: 'services#show'
   get 'service/create_today_services' , to: 'contracts#create_today_services'
+  
+  
   get 'dashboard', to: 'dashboard#index'
   get 'dashboard/contract_report', to: 'dashboard#contract_report'
   get 'dashboard/denied', to: 'dashboard#denied_services'
@@ -37,4 +39,8 @@ Rails.application.routes.draw do
   get 'dashboard/contracts', to: 'dashboard#contracts'
   get 'dashboard/pusher', to: 'dashboard#pusher'
   get 'customer/dashboard', to: 'dashboard#customer_dashboard'
+
+
+  get 'dashboard/services', to: "dashboard#services"
+  get 'dashboard/map', to: "dashboard#map"
 end

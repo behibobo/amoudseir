@@ -5,7 +5,7 @@ class ContractsController < ApplicationController
   def index
 
     if current_user.admin?
-      @contracts = Contract.includes(:elevators).where(status: :active).order(:contract_number)
+      @contracts = Contract.includes([:user, :customer, :elevators, :services]).where(status: :active).order(:contract_number)
       @total_records = Contract.count
     elsif current_user.customer?
       @contracts = current_user.customer_contracts.where(status: :active).order(:contract_number)
@@ -15,6 +15,14 @@ class ContractsController < ApplicationController
       @total_records = current_user.technician_contracts.count
     end
 
+    @contracts = @contracts.where(service_day: params[:service_day]) if params[:service_day]
+
+    @contracts = @contracts.where(contract_number: params[:contract_number]) if params[:contract_number]
+    if params[:customer_name]
+      ids = @contracts.select {|c| c.customer.full_name.include? params[:customer_name]}
+      @contracts = @contracts.where(id: ids.map(&:id))
+    end
+    
     result = @contracts.paginate(page: params[:page], per_page: params[:per_page])
     render json: {
       result: ActiveModelSerializers::SerializableResource.new(result),
