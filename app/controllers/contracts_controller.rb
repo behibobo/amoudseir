@@ -14,16 +14,12 @@ class ContractsController < ApplicationController
       @contracts = current_user.technician_contracts.where(status: :active).order(:contract_number)
       @total_records = current_user.technician_contracts.count
     end
+    
+    @contracts = @contracts.where(service_day: params[:service_day]) if params[:service_day].present?
 
-    if params[:service_day] and params[:service_day] != ""
-      @contracts = @contracts.where(service_day: params[:service_day]) if params[:service_day]
-    end
-
-    if params[:contract_number] and params[:contract_number]  != ""
-      @contracts = @contracts.where(contract_number: params[:contract_number]) if params[:contract_number]
-    end
-
-    if params[:customer_name]
+    @contracts = @contracts.where(contract_number: params[:contract_number]) if params[:contract_number].present?
+    
+    if params[:customer_name].present?
       ids = @contracts.select {|c| c.customer.full_name.include? params[:customer_name]}
       @contracts = @contracts.where(id: ids.map(&:id))
     end
