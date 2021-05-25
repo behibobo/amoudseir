@@ -130,7 +130,7 @@ class ContractsController < ApplicationController
   end
 
   def create_today_services
-    Contract.create_today_services
+    Contract.create_services
     render json: [], status: :created
   end
 
